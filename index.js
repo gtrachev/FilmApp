@@ -87,6 +87,10 @@ app.use('/tvshows', tvshowRoutes);
 app.use('/films', filmsRoutes);
 app.use('/user', userRoutes);
 
+app.get('/', (req, res) => {
+    res.redirect('/films');
+})
+
 app.all('*', (req, res, next) => {
     next(new AppError('Page not found', '404', 'Could not find that page.'));
 })
