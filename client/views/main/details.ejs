@@ -63,7 +63,7 @@
                 <% if (isFilm ? user.film_favourites.includes(result.id) : user.tvshow_favourites.includes(result.id)) { %>
                     <button class="btn w-100 btn-variant-transparent"><i class="fas fa-heart-broken mr-05"></i>Remove from favourites</button>
                 <% } else { %>
-                    <button class="btn w-100 btn-secondary-transparent"><i class="fas fa-bookmark mr-05"></i>Add to favourites</button>
+                    <button class="btn w-100 btn-secondary-transparent"><i class="fas fa-heart mr-05"></i>Add to favourites</button>
                 <% } %>
             </form>
         </div>
