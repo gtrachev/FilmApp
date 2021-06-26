@@ -1,0 +1,95 @@
+.next-page-btn {
+    min-width: 50px;
+}
+.advanced-input-container {
+    .btn-search {
+        border-radius: 0;
+        @include smoothTransition;
+        i {
+            @include smoothTransition;
+        }
+        &:hover {
+            background: $white-color;
+            i {
+                color: $secondary-color;
+            }
+        }
+    }
+    .btn-show-advanced {
+        min-width: 100px;
+        border-radius: 0 10px 10px 0;
+        background: rgba($secondary-color, .2);
+        color: $secondary-color;
+        @include smoothTransition;
+        &:hover {
+            background: rgba($primary-color, .2);
+            color: $primary-color;
+        }
+    }
+}
+.advanced-options-container {
+    border-radius: 0 0 10px 10px;
+    background: rgba($secondary-color, .2);
+    height: 0;
+    overflow: hidden;
+    select {
+        &:hover {
+            cursor: pointer;
+        }
+        option {
+            background: $dark-color;
+        }
+    }
+    @include smoothTransition;
+    .advanced-option {
+        min-width: 45%;
+        margin-bottom: 1rem;
+    }
+    .advanced-label {
+        color: $secondary-color;
+        margin-bottom: .2rem;
+        display: block;
+    }
+    .advanced-input {
+        background-color: rgba($secondary-color, .2);
+        font-size: 1rem;
+        border: 0;
+        border-bottom: 1px solid $secondary-color;
+        color: $secondary-color;
+        padding: .2rem;
+    }
+}
+.showAdvanced {
+    .advanced-options-container {
+        height: 230px;
+    }
+    .btn-show-advanced {
+        border-radius: 0 10px 0 0;
+    }
+    .search-input {
+        border-radius: 10px 0 0 0;
+    }
+}
+.advanced-btn {
+    font-size: 1rem;
+    padding: .2rem;
+    border-radius: 10px;
+    border: 1px solid $secondary-color;
+    background: rgba($secondary-color, .2);
+    color: $secondary-color;
+    margin-top: 21px;
+    height: 30px;
+    @include smoothTransition;
+    &:hover {
+        cursor: pointer;
+        background: rgba($primary-color, .2);
+        color: $primary-color;
+        border: 1px solid $primary-color;
+    }
+}
+@media (max-width: 700px) {
+    .search-form,
+    .advanced-options-container {
+        width: 100%;
+    }
+}

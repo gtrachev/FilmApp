@@ -1,0 +1,30 @@
+.flash-error-card {
+    background: rgba($danger-color, 0.2);
+    border: 1px solid $danger-color;
+    color: $danger-color;
+    border-radius: 10px;
+    .close-flash {
+        padding: 0;
+        background: rgba(0, 0, 0, 0);
+        color: $danger-color;
+        @include smoothTransition;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+.flash-success-card {
+    background: rgba($success-color, 0.2);
+    border: 1px solid $success-color;
+    color: $success-color;
+    border-radius: 10px;
+    .close-flash {
+        padding: 0;
+        background: rgba(0, 0, 0, 0);
+        color: $success-color;
+        @include smoothTransition;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

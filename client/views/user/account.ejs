@@ -1,0 +1,157 @@
+<% layout('/layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/account.css">
+<div class="bg-carousel-container">
+    <div class="bg-carousel">
+        <div class="bg-track-container">
+            <ul class="bg-track bg-track-transition">
+                <% popular.forEach((film, i) => { %> 
+                    <li class="bg-slide <%= i === 0 ? 'bg-currentSlide' : ''%>">
+                        <img class="bg-carousel-img" alt="Posters of popular movies, displayed in a carousel." src="https://image.tmdb.org/t/p/original<%= film.backdrop_path %>">
+                    </li>
+                <% }) %>
+            </ul>
+            <div class="account-bg-carousel-overlay"></div>
+        </div>
+    </div>
+</div>
+<div class="profile-info-container d-flex justify-between align-center">
+    <div class="d-flex" id="account-profile">
+        <img src="https://pbs.twimg.com/profile_images/457249248619134976/pou_jHw7.jpeg" class="image" alt="">
+        <div class="profile-info-edit-container">
+            <i class="fas fa-edit primary-text"></i>
+        </div>
+        <h1 class="lg secondary-text ml-2"><%= user.username %></h1>
+    </div>
+    <div class="d-flex flex-column align-end justify-center" id="account-options">
+        <a href="/" class="d-block"><button class="btn btn-secondary-transparent"><i class="fas fa-edit secondary-text mr-05"></i>Edit your profile</button></a>
+        <form action="/user/logout" class="mt-1" method="POST">
+            <button class="btn btn-danger-transparent"><i class="fas fa-sign-out-alt danger-text mr-05"></i>Log out</button>
+        </form>
+    </div>
+</div>
+<div class="mt-2 container w-60">
+    <%- include('../partials/flash') %>
+</div>
+<div class="mt-1">
+    <h2 class="secondary-text text-center md">Your history and activity:</h2>
+</div>
+<div class="account-activity-section container">
+    <h3 class="secondary-text text-center s mt-1">Favourite movies</h3>
+    <% if (filmFavourites && filmFavourites.length) { %>
+        <div class="container showcase-films-container">
+            <% filmFavourites.forEach( result => { %>
+                <a href="/films/details/<%= result.id %>">
+                    <div class="showcase-film d-flex justify-start align-center flex-column">
+                        <img src="https://image.tmdb.org/t/p/original<%= result.poster %>" class="showcase-film-poster" alt="">
+                        <div class="showcase-film-info">
+                            <p class="showcase-film-info-title secondary-text text-center mb-05"><%= result.title %></p>
+                            <p class="primary-text text-center showcase-film-info-genre"><% result.genres.forEach((genre, i) => { %>
+                                <% if(i < 2) { %> 
+                                    <%= genre.name %>
+                                    <% if(i < result.genres.length - 1 && i < 1){ %>
+                                        /
+                                    <% } %>
+                                <% } %>
+                            <% }) %></p>
+                        </div>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="error-container w-80 d-flex mt-1 mb-1 mx-auto">
+            <p class="w-100">No favourite movies.</p>
+        </div>
+    <% } %>
+</div>
+<div class="account-activity-section container">
+    <h3 class="secondary-text text-center s mt-1">Favourite TV-shows</h3>
+    <% if (tvshowFavourites && tvshowFavourites.length) { %>
+        <div class="container showcase-films-container">
+            <% tvshowFavourites.forEach( result => { %>
+                <a href="/tvshows/details/<%= result.id %>">
+                    <div class="showcase-film d-flex justify-start align-center flex-column">
+                        <img src="https://image.tmdb.org/t/p/original<%= result.poster %>" class="showcase-film-poster" alt="">
+                        <div class="showcase-film-info">
+                            <p class="showcase-film-info-title secondary-text text-center mb-05"><%= result.title %></p>
+                            <p class="primary-text text-center showcase-film-info-genre"><% result.genres.forEach((genre, i) => { %>
+                                <% if(i < 2) { %> 
+                                    <%= genre.name %>
+                                    <% if(i < result.genres.length - 1 && i < 1){ %>
+                                        /
+                                    <% } %>
+                                <% } %>
+                            <% }) %></p>
+                        </div>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="error-container w-80 mt-1 mb-1 mx-auto">
+            <p>No favourite tv-shows.</p>
+        </div>
+    <% } %>
+</div>
+<div class="account-activity-section container">
+    <h3 class="secondary-text text-center s mt-1">Movie watchlist</h3>
+    <% if (filmWatchlist && filmWatchlist.length) { %>
+        <div class="container showcase-films-container">
+            <% filmWatchlist.forEach( result => { %>
+                <a href="/films/details/<%= result.id %>">
+                    <div class="showcase-film d-flex justify-start align-center flex-column">
+                        <img src="https://image.tmdb.org/t/p/original<%= result.poster %>" class="showcase-film-poster" alt="">
+                        <div class="showcase-film-info">
+                            <p class="showcase-film-info-title secondary-text text-center mb-05"><%= result.title %></p>
+                            <p class="primary-text text-center showcase-film-info-genre"><% result.genres.forEach((genre, i) => { %>
+                                <% if(i < 2) { %> 
+                                    <%= genre.name %>
+                                    <% if(i < result.genres.length - 1 && i < 1){ %>
+                                        /
+                                    <% } %>
+                                <% } %>
+                            <% }) %></p>
+                        </div>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="error-container w-80 mt-1 mb-1 mx-auto">
+            <p>No movies in your watchlist.</p>
+        </div>
+    <% } %>
+</div>
+<div class="account-activity-section container">
+    <h3 class="secondary-text text-center s mt-1">TV-show watchlist</h3>
+    <% if (tvshowWatchlist && tvshowWatchlist.length) { %>
+        <div class="container showcase-films-container">
+            <% tvshowWatchlist.forEach( result => { %>
+                <a href="/tvshows/details/<%= result.id %>">
+                    <div class="showcase-film d-flex justify-start align-center flex-column">
+                        <img src="https://image.tmdb.org/t/p/original<%= result.poster %>" class="showcase-film-poster" alt="">
+                        <div class="showcase-film-info">
+                            <p class="showcase-film-info-title secondary-text text-center mb-05"><%= result.title %></p>
+                            <p class="primary-text text-center showcase-film-info-genre"><% result.genres.forEach((genre, i) => { %>
+                                <% if(i < 2) { %> 
+                                    <%= genre.name %>
+                                    <% if(i < result.genres.length - 1 && i < 1){ %>
+                                        /
+                                    <% } %>
+                                <% } %>
+                            <% }) %></p>
+                        </div>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="error-container w-80 mt-1 mb-1 mx-auto">
+            <p>No tv-shows in your watchlist.</p>
+        </div>
+    <% } %>
+</div>
+
+<script src="/js/bg-carousel.js"></script>
+<script src="/js/animateRendered.js"></script>
+<script src="/js/changeNav.js"></script>

@@ -1,0 +1,226 @@
+<% layout('/layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/index.css">
+<div class="w-100 pos-relative">
+    <div class="bg-carousel-container">
+        <div class="bg-carousel">
+            <div class="bg-track-container">
+                <ul class="bg-track bg-track-transition">
+                    <% popular.forEach((film, i) => { %> 
+                        <li class="bg-slide <%= i === 0 ? 'bg-currentSlide' : ''%>">
+                            <img class="bg-carousel-img" alt="Posters of popular movies, displayed in a carousel." src="https://image.tmdb.org/t/p/original<%= film.backdrop_path %>">
+                        </li>
+                    <% }) %>
+                </ul>
+                <div class="index-bg-carousel-overlay"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container head-section d-flex flex-column align-center">
+        <div class="w-70 primary-text welcome-container move-right">
+            <h1 class="text-center">Welcome to FilmApp!</h1>
+            <h2 class="s text-center secondary-text">The place to browse and discover countless movies and TV-shows!</h2>
+        </div>
+        <div class="w-70 search-container move-left mt-2">
+            <form action="<%= isFilm ? '/films' : '/tvshows' %>/search" class="w-100" method="GET">
+                <div class="w-100 d-flex align-center search-input-container">
+                    <div class="w-90">
+                        <label class="input-label op-1" for="search"></label>
+                        <input class="input search-input w-100" placeholder="Search" value="" name="search" id="search"/>
+                    </div>
+                    <button class="btn w-10 btn-search bg-primary"><i class="fas fa-search w-100 dark-text"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="mt-2">
+    <%- include('../partials/flash') %>
+</div>
+<div class="container of-hidden d-flex justify-evenly">
+    <a href="/films" class="w-40 move-right controller-switch <%= isFilm ? 'controller-switch-active' : '' %> btn"><span>Movies</span></a> 
+    <a href="/tvshows" class="w-40 move-left controller-switch  <%= isFilm ? '' : 'controller-switch-active' %> btn"><span>TV-shows</span></a>
+</div>
+<div class="container categories-container">
+    <% if (isFilm) { %>
+        <h3 class="s secondary-text category-header">Popular</h3>
+        <div class="carousel">
+            <button class="carousel-btn previous"><i class="fas fa-angle-left secondary-text"></i></button>
+            <div class="track-container">
+                <ul class="track">
+                    <% popular.forEach((film, i) => { %>
+                        <li class="slide <%= i === 0 ? 'currentSlide' : '' %> px-05 d-flex align-center justify-between">
+                            <a href="/films/details/<%= film.id %>">
+                                <div class="carousel-details-container pos-relative">
+                                    <img src="https://image.tmdb.org/t/p/original<%= film.poster %>" alt="A poster image of <%= film.title %>" class="carousel-poster-image">
+                                    <div class="carousel-poster-info">
+                                        <p class="film-poster-title"><%= film.title %></p>
+                                        <p class="film-poster-genre"><% film.genres.forEach((genre, i) => { %>
+                                            <% if(i < 2) { %> 
+                                                <%=genre.name %>
+                                                <% if(i < film.genres.length - 1 && i < 1){ %>
+                                                    /
+                                                <% } %>
+                                            <% } %>
+                                        <% }) %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <button class="carousel-btn next"><i class="fas fa-angle-right secondary-text"></i></button>
+        </div>
+        <h3 class="s secondary-text category-header">Upcoming</h3>
+        <div class="carousel">
+            <button class="carousel-btn previous"><i class="fas fa-angle-left secondary-text"></i></button>
+            <div class="track-container">
+                <ul class="track">
+                    <% upcoming.forEach((film, i) => { %>
+                        <li class="slide <%= i === 0 ? 'currentSlide' : '' %> px-05 d-flex align-center justify-between">
+                            <a href="/films/details/<%= film.id %>">
+                                <div class="carousel-details-container pos-relative">
+                                    <img src="https://image.tmdb.org/t/p/original<%= film.poster %>" alt="A poster image of <%= film.title %>" class="carousel-poster-image">
+                                    <div class="carousel-poster-info">
+                                        <p class="film-poster-title"><%= film.title %></p>
+                                        <p class="film-poster-genre"><% film.genres.forEach((genre, i) => { %>
+                                            <% if(i < 3) { %> 
+                                                <%=genre.name %>
+                                                <% if(i < film.genres.length - 1 && i < 2){ %>
+                                                    /
+                                                <% } %>
+                                            <% } %>
+                                            <% }) %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <button class="carousel-btn next"><i class="fas fa-angle-right secondary-text"></i></button>
+        </div>
+        <h3 class="s secondary-text category-header">Highest rated</h3>
+        <div class="carousel">
+            <button class="carousel-btn previous"><i class="fas fa-angle-left secondary-text"></i></button>
+            <div class="track-container">
+                <ul class="track">
+                    <% top_rated.forEach((film, i) => { %>
+                        <li class="slide <%= i === 0 ? 'currentSlide' : '' %> px-05 d-flex align-center justify-between">
+                            <a href="/films/details/<%= film.id %>">
+                                <div class="carousel-details-container pos-relative">
+                                    <img src="https://image.tmdb.org/t/p/original<%= film.poster %>" alt="A poster image of <%= film.title %>" class="carousel-poster-image">
+                                    <div class="carousel-poster-info">
+                                        <p class="film-poster-title"><%= film.title %></p>
+                                        <p class="film-poster-genre"><% film.genres.forEach((genre, i) => { %>
+                                            <% if(i < 3) { %> 
+                                                <%=genre.name %>
+                                                <% if(i < film.genres.length - 1 && i < 2){ %>
+                                                    /
+                                                <% } %>
+                                            <% } %>
+                                        <% }) %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <button class="carousel-btn next"><i class="fas fa-angle-right secondary-text"></i></button>
+        </div>
+    <% } else { %>
+        <h3 class="s secondary-text category-header">Popular</h3>
+        <div class="carousel">
+            <button class="carousel-btn previous"><i class="fas fa-angle-left secondary-text"></i></button>
+            <div class="track-container">
+                <ul class="track">
+                    <% popular.forEach((tvshow, i) => { %>
+                        <li class="slide <%= i === 0 ? 'currentSlide' : '' %> px-05 d-flex align-center justify-between">
+                            <a href="/tvshows/details/<%= tvshow.id %>">
+                                <div class="carousel-details-container pos-relative">
+                                    <img src="https://image.tmdb.org/t/p/original<%= tvshow.poster %>" alt="A poster image of <%= tvshow.title %>" class="carousel-poster-image">
+                                    <div class="carousel-poster-info">
+                                        <p class="film-poster-title"><%= tvshow.title %></p>
+                                        <p class="film-poster-genre"><% tvshow.genres.forEach((genre, i) => { %>
+                                            <% if(i < 2) { %> 
+                                                <%=genre.name %>
+                                                <% if(i < tvshow.genres.length - 1 && i < 1){ %>
+                                                    /
+                                                <% } %>
+                                            <% } %>
+                                        <% }) %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <button class="carousel-btn next"><i class="fas fa-angle-right secondary-text"></i></button>
+        </div>
+        <h3 class="s secondary-text category-header">On Air</h3>
+        <div class="carousel">
+            <button class="carousel-btn previous"><i class="fas fa-angle-left secondary-text"></i></button>
+            <div class="track-container">
+                <ul class="track">
+                    <% onAir.forEach((tvshow, i) => { %>
+                        <li class="slide <%= i === 0 ? 'currentSlide' : '' %> px-05 d-flex align-center justify-between">
+                            <a href="/tvshows/details/<%= tvshow.id %>">
+                                <div class="carousel-details-container pos-relative">
+                                    <img src="https://image.tmdb.org/t/p/original<%= tvshow.poster %>" alt="A poster image of <%= tvshow.title %>" class="carousel-poster-image">
+                                    <div class="carousel-poster-info">
+                                        <p class="film-poster-title"><%= tvshow.title %></p>
+                                        <p class="film-poster-genre"><% tvshow.genres.forEach((genre, i) => { %>
+                                            <% if(i < 3) { %> 
+                                                <%=genre.name %>
+                                                <% if(i < tvshow.genres.length - 1 && i < 2){ %>
+                                                    /
+                                                <% } %>
+                                            <% } %>
+                                            <% }) %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <button class="carousel-btn next"><i class="fas fa-angle-right secondary-text"></i></button>
+        </div>
+        <h3 class="s secondary-text category-header">Highest rated</h3>
+        <div class="carousel">
+            <button class="carousel-btn previous"><i class="fas fa-angle-left secondary-text"></i></button>
+            <div class="track-container">
+                <ul class="track">
+                    <% top_rated.forEach((tvshow, i) => { %>
+                        <li class="slide <%= i === 0 ? 'currentSlide' : '' %> px-05 d-flex align-center justify-between">
+                            <a href="/tvshows/details/<%= tvshow.id %>">
+                                <div class="carousel-details-container pos-relative">
+                                    <img src="https://image.tmdb.org/t/p/original<%= tvshow.poster %>" alt="A poster image of <%= tvshow.title %>" class="carousel-poster-image">
+                                    <div class="carousel-poster-info">
+                                        <p class="film-poster-title"><%= tvshow.title %></p>
+                                        <p class="film-poster-genre"><% tvshow.genres.forEach((genre, i) => { %>
+                                            <% if(i < 3) { %> 
+                                                <%=genre.name %>
+                                                <% if(i < tvshow.genres.length - 1 && i < 2){ %>
+                                                    /
+                                                <% } %>
+                                            <% } %>
+                                        <% }) %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <button class="carousel-btn next"><i class="fas fa-angle-right secondary-text"></i></button>
+        </div>
+    <% } %>    
+</div>
+
+<script src="/js/animateRendered.js"></script>
+<script src="/js/carousel.js"></script>
+<script src="/js/bg-carousel.js"></script>
+<script src="/js/changeNav.js"></script>

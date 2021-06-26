@@ -1,0 +1,27 @@
+//SEARCH FORM
+.search-input {
+    padding: 1rem;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    font-size: 1rem;
+    height: 50px;
+    @include smoothTransition;
+}
+.btn-search {
+    min-width: 50px;
+    border-radius: 0 10px 10px 0;
+    height: 50px;
+    i {
+        font-size: 1.4rem;
+    }
+    @include smoothTransition;
+    &:hover {
+        background: $secondary-color;
+        opacity: 1;
+    }
+    @include flex(center, center, row, nowrap);
+}
+.search-input-container {
+    border-radius: 10px;
+}
+//SEARCH FORM

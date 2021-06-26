@@ -1,0 +1,40 @@
+.head-section {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: .5rem;
+    }
+}
+
+@media(max-width: 700px) {
+    .head-section {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        .search-container {
+            margin-top: 1rem;
+        }
+    }
+    .welcome-container,
+    .search-container {
+        width: 90%;
+    }
+    .search-container {
+        margin-top: 2rem;
+    }
+}
+@media(max-width: 500px) {
+    .welcome-container,
+    .search-container {
+        width: 100%;
+    }
+}

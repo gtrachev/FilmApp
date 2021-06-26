@@ -1,0 +1,13 @@
+<% if(error && error.length) { %>
+    <div class="mb-1 w-80 flash-error-card container p-1 d-flex justify-between flash-card" role="alert">
+        <p class="w-80 flash-text"><%= error %></p> 
+        <button type="button" class="close-flash btn" data-bs-dismiss="alert"><i class="fas fa-times s"></i></button>
+    </div>
+<% } else if(success && success.length) { %>
+    <div class="mb-1 w-80 flash-success-card container p-1 d-flex justify-between flash-card" role="alert">
+        <p class="w-80 flash-text"><%= success %></p>
+        <button type="button" class="close-flash btn" data-bs-dismiss="alert"><i class="fas fa-times s"></i></button>
+    </div>
+<% } %>
+
+<script src="/js/closeFlash.js"></script>

@@ -1,0 +1,16 @@
+<nav class="p-1" id="nav">
+    <div class="link-container w-100 d-flex justify-between nav-content">
+        <div class="d-flex">
+            <a href="/films" class="primary-text link mr-1"><h1 class="s">FilmApp</h1></a>
+        </div>
+        <div class="nav-link d-flex">
+            <a href="/films" class="primary-text link-icon"><i class="fas fa-home md"></i></a>
+            <a href="/films/search" class="primary-text link-icon d-block ml-2"><i class="fab fa-wpexplorer md"></i></a>
+            <% if (user) { %>
+                <a href="/user/account/<%= user.username %>" class="primary-text link-icon d-block ml-2"><i class="fas fa-user-circle md"></i></a>                
+            <% } else { %>
+                <a href="/user/login" class="primary-text link-icon d-block ml-2"><i class="fas fa-user-circle md"></i></a>
+            <% } %> 
+        </div>
+    </div>
+</nav>

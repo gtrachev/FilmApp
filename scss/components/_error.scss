@@ -1,0 +1,11 @@
+.error-container {
+    background: $danger-color;
+    color: $white-color;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    i {
+        font-size: 5rem;
+    }
+}

@@ -1,0 +1,30 @@
+.showcase-film {
+    border: .8px solid $primary-color;
+    @include smoothTransition;
+    opacity: .1;
+    #{&}-poster {
+        width: 100%;
+    }
+    #{&}-info {
+        padding: .5rem;
+        border-top: none;
+        width: 100%;
+    }
+    #{&}-info-title {
+        font-size: 1.1rem;
+    }
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+.showcase-films-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+}
+@media (max-width: 400px) {
+    .showcase-films-container {
+        width: 80%;
+    }
+}

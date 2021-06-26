@@ -1,0 +1,99 @@
+<% layout('/layouts/boilerplate') %>
+<div class="container discover-search-container">
+    <form action="<%= isFilm ? '/films' : '/tvshows' %>/search" class="w-90 search-form mx-auto" method="GET">
+        <div class="w-100 d-flex align-center search-input-container advanced-input-container">
+            <div class="w-75">
+                <label class="input-label op-1" for="search"></label>
+                <input class="input search-input w-100" placeholder="Search" value="<%= searchQuery %>" name="search" id="search"/>
+            </div>
+            <button type="submit" class="btn w-10 btn-search bg-white"><i class="fas fa-search w-100 dark-text"></i></button>
+            <button type="button" class="btn w-15 btn-show-advanced" id="advancedBtn">Advanced</button>
+        </div>
+    </form>
+    <div class="advanced-options-container w-90 mx-auto d-flex justify-between">
+        <form action="<%= isFilm ? '/films' : '/tvshows' %>/search" class="p-1 w-100 d-flex flex-wrap justify-between advanced-form mx-auto" method="GET">
+            <div class="advanced-option w-45">
+                <label class="input-label advanced-label op-1" for="genres">Genre</label>
+                <input class="input advanced-input w-100" value="<%= advancedQuery.genres %>" name="advanced[genres]" id="genres"/>
+            </div>
+            <div class="advanced-option w-45">
+                <label class="input-label advanced-label op-1" for="vote">Lowest rating</label>
+                <input type="number" min="0" max="10" class="input advanced-input w-100" value="<%= advancedQuery.vote %>" name="advanced[vote]" id="vote"/>
+            </div>
+            <div class="advanced-option w-45">
+                <label class="input-label advanced-label op-1" for="language">Language</label>
+                <input class="input advanced-input w-100" value="<%= advancedQuery.language %>" name="advanced[language]" id="language"/>
+            </div>
+            <div class="advanced-option w-45">
+                <label class="input-label advanced-label op-1" for="year">Released on</label>
+                <input type="number" class="input advanced-input w-100" value="<%= advancedQuery.year %>" name="advanced[year]" id="year"/>
+            </div>
+            <div class="advanced-option w-45">
+                <label class="input-label advanced-label op-1" for="popularity">Popularity</label>
+                <select class="input advanced-input w-100" value="" name="advanced[sort_by]" id="popularity">
+                    <option value="popularity.desc">Descending popularity</option>
+                    <option value="popularity.asc">Ascending popularity</option>
+                </select>
+            </div>
+            <div class="advanced-option w-45">
+                <button type="submit" class="w-100 advanced-btn">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container d-flex justify-evenly of-hidden">
+    <a href="/films/search" class="w-40 move-right controller-switch <%= isFilm ? 'controller-switch-active' : '' %> btn"><span>Movies</span></a> 
+    <a href="/tvshows/search" class="w-40 move-left controller-switch  <%= isFilm ? '' : 'controller-switch-active' %> btn"><span>TV-shows</span></a>
+</div>
+<% if (found && found.length) { %>
+    <div class="container showcase-films-container">
+        <% found.forEach( result => { %>
+            <a href="/<%= isFilm ? 'films' : 'tvshows' %>/details/<%= result.id %>">
+                <div class="showcase-film d-flex justify-start align-center flex-column">
+                    <img src="https://image.tmdb.org/t/p/original<%= result.poster %>" class="showcase-film-poster" alt="">
+                    <div class="showcase-film-info">
+                        <p class="showcase-film-info-title primary-text mb-05"><%= result.title %></p>
+                        <p class="secondary-text"><% result.genres.forEach((genre, i) => { %>
+                            <% if(i < 2) { %> 
+                                <%= genre.name %>
+                                <% if(i < result.genres.length - 1 && i < 1){ %>
+                                    /
+                                <% } %>
+                            <% } %>
+                        <% }) %>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+    <% if (advancedQuery.year.length) { %>
+        <div class="container d-flex align-center flex-wrap justify-center my-1">
+            <% if (parseInt(pageQuery) > 1) { %>
+                <a href="/<%= isFilm ? 'films' : 'tvshows' %>/search/?advanced[genres]=<%= advancedQuery.genres %>&advanced[vote]=<%= advancedQuery.vote %>&advanced[sort_by]=<%= advancedQuery.sort_by %>&advanced[language]=<%= advancedQuery.language %>&advanced[year]=<%= advancedQuery.year %>?page=<%= parseInt(pageQuery) - 1 %>" class="btn-secondary btn">Previous Page</a>
+            <% } %>
+            <a href="/<%= isFilm ? 'films' : 'tvshows' %>/search/?advanced[genres]=<%= advancedQuery.genres %>&advanced[vote]=<%= advancedQuery.vote %>&advanced[sort_by]=<%= advancedQuery.sort_by %>&advanced[language]=<%= advancedQuery.language %>&advanced[year]=<%= advancedQuery.year %>&page=<%= parseInt(pageQuery) + 1 %>" class="mx-1 btn-secondary btn next-btn">Next Page</a>
+        </div>
+    <% } else { %>
+        <div class="container d-flex align-center flex-wrap justify-center my-1">
+            <% if (parseInt(pageQuery) > 1) { %>
+                <a href="/<%= isFilm ? 'films' : 'tvshows' %>/search?search=<%= searchQuery %>&page=<%= parseInt(pageQuery) - 1 %>" class="btn-secondary btn">Previous Page</a>
+            <% } %>
+            <% if (parseInt(pageQuery) < pageCount) { %>
+                <a href="/<%= isFilm ? 'films' : 'tvshows' %>/search?search=<%= searchQuery %>&page=<%= parseInt(pageQuery) + 1 %>" class="mx-1 btn-secondary btn next-btn">Next Page</a>
+            <% } %>
+        </div>
+    <% } %> 
+
+<% } else { %>
+    <div class="error-container container">
+        <% if (searchQuery.length) { %>
+                <p>No results found with the name of <%= searchQuery %></p>
+        <% } else { %>
+                <p>No results found.</p>
+        <% } %>
+    </div>
+<% } %> 
+
+<script src="/js/animateRendered.js"></script>
+<script src="/js/showAdvanced.js"></script>

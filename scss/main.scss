@@ -1,0 +1,106 @@
+@import './utilities';
+
+//COMPONENTS
+@import './components/buttons';
+@import './components/carousel';
+@import './components/flash';
+@import './components/miscellaneous';
+@import './components/search_form';
+@import './components/showcase';
+@import './components/error';
+@import './components/bg-carousel';
+
+//BASE
+@import './base/details';
+@import './base/index';
+@import './base/search';
+
+//USER
+@import './user/account';
+@import './user/user';
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 110;
+    border-bottom: 1px solid rgba($primary-color, .8);
+}
+
+nav {
+    background: $dark-color;
+    @include smoothTransition;
+}
+
+.showNavBg {
+    background: $dark-color;
+    border-bottom: 1px solid rgba($primary-color, .8);
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+    height: 20px;
+    /* Handle on hover */
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.link-icon {
+    @include smoothTransition;
+    &:hover {
+        cursor: pointer;
+        transform-origin: center;
+        color: $secondary-color;
+        transform: scale(1.1);
+    }
+}
+
+.nav-content,
+.footer-content {
+    margin: 0 auto;
+    max-width: 1300px;
+}
+
+@media (max-width: 600px) {
+    .footer-links {
+        flex-direction: column;
+        #{&}-routes {
+            flex-direction: column;
+        }
+        h2 {
+            margin-bottom: 1rem;
+            margin-right: 0;
+        }
+        i {
+            margin-top: 1rem;
+        }
+    }   
+}

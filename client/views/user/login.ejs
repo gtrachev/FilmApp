@@ -1,0 +1,32 @@
+<% layout('/layouts/boilerplate') %>
+<%- include('../partials/flash') %>
+<link rel="stylesheet" href="/css/user.css">
+<div class="account-form-container d-flex bg-dark" id="login-container">
+  <div class="account-form-header h-100 w-35 bg-dark">
+    <div class="account-form-header-text white-text">
+      <h2 class="">Welcome</h2>
+      <h3 class="mb-1">to FilmApp!</h3>
+      <p class="text-center">Sign in to stay connected, browse, rate and expand your wachlist!</p>
+    </div>
+  </div>
+  <div class="account-form-content w-65 secondary-text">
+    <h2 class="text-center mb-1">Sign in / <a href="/user/register" class="variant-text">Sign up</a></h2>
+    <form class="w-100 mx-auto account-form-content-form" id="account-form" novalidate action="/user/login" method="POST">
+      <div class="mx-auto w-70 mb-2">
+          <label class="input-label op-1 xs mb-05 d-block" for="username">Username</label>
+          <input class="input account-input w-100" name="username" id="username"/>
+          <p class="d-none danger-text">Username must be between 1 and 20 chracters long and not include any special characters.</p>
+      </div>
+      <div class="mx-auto w-70 mb-2">
+          <label class="input-label op-1 xs mb-05 d-block" for="password">Password</label>
+          <input class="input account-input w-100" type="password" name="password" id="password"/>
+          <p class="d-none danger-text">Password must be at least 4 characters long.</p>
+      </div>
+      <div class="mx-auto w-70">
+          <button type="submit" class="w-100 account-btn">Sign in</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/formValidation.js"></script>

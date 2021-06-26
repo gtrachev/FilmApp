@@ -1,0 +1,116 @@
+.flash-success-card,
+.flash-error-card {
+    margin-top: 0;
+}
+.account-form-container {
+    width: 80%;
+    height: 500px;
+    min-width: 600px;
+    max-width: 1300px;
+    border-radius: 15px;
+    border: none;
+    overflow: hidden;
+}
+.account-form-header {
+    position: relative;
+    #{&}-text {
+        background: rgba($secondary-color, .3);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        z-index: 100;
+        border-radius: 15px 0 0 15px;
+        h2 {
+            letter-spacing: 3px;
+            font-size: 2rem;
+        }
+        h3 {
+            letter-spacing: 1px;
+            font-size: 1.3rem;
+            color: $secondary-color;
+        }
+        p {
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+        }
+    }
+}
+.account-form-content {
+    padding: 1.5rem;
+    h2 {
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+        a {
+            opacity: .8;
+            @include smoothTransition;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+#login-container {
+    height: 400px;
+}
+.account-input {
+    background-color: rgba($secondary-color, .2);
+    font-size: 1.2rem;
+    border: 0;
+    border-bottom: 1px solid $secondary-color;
+    color: $secondary-color;
+    padding: .2rem;
+}
+.account-btn {
+    font-size: 1.2rem;
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid $secondary-color;
+    background: rgba($secondary-color, .2);
+    color: $secondary-color;
+    
+    @include smoothTransition;
+    &:hover {
+        cursor: pointer;
+        background: rgba($primary-color, .2);
+        color: $primary-color;
+        border: 1px solid $primary-color;
+    }
+}
+
+.validated {
+    border-bottom: 1px solid $success-color;
+    background: rgba($success-color, .2);
+}
+.not-validated {
+    border-bottom: 1px solid $danger-color;
+    background: rgba($danger-color, .2);
+}
+
+@media (max-width: 650px) {
+    .account-form-container {
+        min-width: 0;
+    }
+    .account-form-header {
+        display: none;
+    }
+    .account-form-content {
+        min-width: 100%;
+        padding: 0;
+        #{&}-form {
+            div {
+                width: 90%;
+            }
+        }
+    }
+}
+
+@media (max-height: 750px) {
+    .account-form-container {
+        min-width: 0;
+        margin: 2rem 0;
+    }
+}
